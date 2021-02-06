@@ -18,5 +18,10 @@ namespace Business.Concrete
         {
             _colors.GetAll();
         }
+
+        public Color GetById(int colorId)
+        {
+            return _colors.Get(p => p.Id == colorId);
+        }
     }
 }

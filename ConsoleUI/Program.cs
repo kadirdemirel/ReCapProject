@@ -16,34 +16,36 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EfCarDal());
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            ColorManager colorManager = new ColorManager(new EfColorDal());
             Car car = new Car() { BrandId = 2, ColorId = 3, ModelYear = "2020", DailyPrice = 500, Description = "Farklılık sevenler için." };
-            carManager.Add(car);
-            Console.WriteLine("Marka|Renk|Model|Günlük Ücret | Açıklama");
-            Console.WriteLine("-----|----|-----|------------ | --------");
+            // carManager.Add(car);
+            Console.WriteLine("-------------------Araba Listesi-------------------");
             foreach (var i in carManager.GetAll())
             {
-                Console.WriteLine(i.BrandId.ToString() + "      " + i.ColorId + "   " + i.ModelYear + "      " + i.DailyPrice.ToString() + "        " + i.Description);
+                Console.WriteLine(brandManager.GetById(i.BrandId).BrandName + " marka aracımızın, rengi " + colorManager.GetById(i.ColorId).ColorName + " modeli " + i.ModelYear + " model olup kiralama ücreti " + i.DailyPrice + " TL'dir." + i.Description);
             }
             Console.WriteLine("-----------------------------------------------------");
-            Console.WriteLine("*1 BrandId'si 1 olan Arabanın açıklamasını getirelim");
+            Console.WriteLine("*1 Markası Fiat olan arabamızı getirelim");
             foreach (var i in carManager.GetCarsByBrandId(1))
             {
-                Console.WriteLine(i.Description);
+                Console.WriteLine(brandManager.GetById(i.BrandId).BrandName + " marka aracımızın, rengi " + colorManager.GetById(i.ColorId).ColorName + " modeli " + i.ModelYear + " model olup kiralama ücreti " + i.DailyPrice + " TL'dir." + i.Description);
             }
             Console.WriteLine("-----------------------------------------------------");
-            Console.WriteLine("*2 ColorId'si 3 olan Arabanın günlük ücretini getirelim");
+            Console.WriteLine("*2 Rengi mavi olan arabamızı getirelim");
             foreach (var i in carManager.GetCarsByColorId(3))
             {
-                Console.WriteLine(i.DailyPrice);
+                Console.WriteLine(brandManager.GetById(i.BrandId).BrandName + " marka aracımızın, rengi " + colorManager.GetById(i.ColorId).ColorName + " modeli " + i.ModelYear + " model olup kiralama ücreti " + i.DailyPrice + " TL'dir." + i.Description);
             }
             Console.WriteLine("-----------------------------------------------------");
             Console.WriteLine("*3 Günlük ücreti 400-600 arasındaki arabaları getirelim");
-            foreach (var i in carManager.GetByDailyPrice(400,600))
+            foreach (var i in carManager.GetByDailyPrice(400, 600))
             {
-                Console.WriteLine(i.BrandId.ToString() + "      " + i.ColorId + "   " + i.ModelYear + "      " + i.DailyPrice.ToString() + "        " + i.Description);
+                Console.WriteLine(brandManager.GetById(i.BrandId).BrandName + " marka aracımızın, rengi " + colorManager.GetById(i.ColorId).ColorName + " modeli " + i.ModelYear + " model olup kiralama ücreti " + i.DailyPrice + " TL'dir." + i.Description);
             }
-            //BrandManager brandManager = new BrandManager(new InMemoryBrandDal());
-            //ColorManager colorManager = new ColorManager(new InMemoryColorDal());
+
+
+
             //Console.WriteLine("----------Marka Listesi---------");
             //brandManager.GetAll();
             //Console.WriteLine("----------Renk Listesi---------");
