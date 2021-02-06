@@ -19,7 +19,7 @@ namespace ConsoleUI
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             ColorManager colorManager = new ColorManager(new EfColorDal());
             Car car = new Car() { BrandId = 2, ColorId = 3, ModelYear = "2020", DailyPrice = 500, Description = "Farklılık sevenler için." };
-            // carManager.Add(car);
+             carManager.Add(car);
             Console.WriteLine("-------------------Araba Listesi-------------------");
             foreach (var i in carManager.GetAll())
             {
