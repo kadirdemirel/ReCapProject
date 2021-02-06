@@ -17,7 +17,7 @@ namespace ConsoleUI
         {
             CarManager carManager = new CarManager(new EfCarDal());
             Car car = new Car() { BrandId = 2, ColorId = 3, ModelYear = "2020", DailyPrice = 500, Description = "Farklılık sevenler için." };
-            // carManager.Add(car);
+            carManager.Add(car);
             Console.WriteLine("Marka|Renk|Model|Günlük Ücret | Açıklama");
             Console.WriteLine("-----|----|-----|------------ | --------");
             foreach (var i in carManager.GetAll())
