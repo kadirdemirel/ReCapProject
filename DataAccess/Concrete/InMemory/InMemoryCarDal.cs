@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Concrete.InMemory
@@ -58,6 +59,11 @@ namespace DataAccess.Concrete.InMemory
             _cars.Remove(carToDelete);
         }
 
+        public Car Get(Expression<Func<Car, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetAll()
         {
             int sira = 0;
@@ -73,6 +79,11 @@ namespace DataAccess.Concrete.InMemory
                 Console.WriteLine(sira + "-)" + " Marka: " + car.BrandName   + " Renk: " + car.ColorName + " Model " + car.ModelYear + " Ücret : " + car.DailyPrice + " TL " + car.Description);
 
             }
+        }
+
+        public List<Car> GetAll(Expression<Func<Car, bool>> filter = null)
+        {
+            throw new NotImplementedException();
         }
 
         public List<Car> GetAllByBrand(int brandId)

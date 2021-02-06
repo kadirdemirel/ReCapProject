@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace DataAccess.Concrete.InMemory
 {
@@ -26,6 +27,21 @@ namespace DataAccess.Concrete.InMemory
 
         }
 
+        public void Add(Brand entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(Brand entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Brand Get(Expression<Func<Brand, bool>> filter)
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetAll()
         {
             int sira = 0;
@@ -38,6 +54,16 @@ namespace DataAccess.Concrete.InMemory
                 Console.WriteLine(sira + "-)" + brand.BrandName);
             }
                 
+        }
+
+        public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(Brand entity)
+        {
+            throw new NotImplementedException();
         }
     }
 }
