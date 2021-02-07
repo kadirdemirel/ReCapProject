@@ -50,20 +50,35 @@ namespace Business.Concrete
             if (car.Description.Length > 2 && car.DailyPrice > 0)
                 _carDal.Add(car);
             else
-            {
-                Console.WriteLine("Hata !,Günlük ücret en az 0 TL ve açıklama uzunkuğu 2 karakterden fazla olmalıdır...");
-            }
+              Console.WriteLine("Hata !,Günlük ücret en az 0 TL ve açıklama uzunkuğu 2 karakterden fazla olmalıdır...");
+
 
         }
 
         public List<Car> GetByDailyPrice(decimal min, decimal max)
         {
+            
             return _carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max);
         }
 
         public Car GetById(int carId)
         {
             return _carDal.Get(p => p.Id == carId);
+        }
+
+        public List<CarDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
+
+        public List<CarDto> GetCarAsc()
+        {
+            return _carDal.GetCarAsc();
+        }
+
+        public List<CarDto> GetCarDesc()
+        {
+            return _carDal.GetCarDesc();
         }
     }
 }

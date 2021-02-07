@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -8,34 +9,8 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfColorDal : IColorDal
+    public class EfColorDal : EfEntityRepositoryBase<Color, RentACarContext>,IColorDal
     {
-        public void Add(Color entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Delete(Color entity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Color Get(Expression<Func<Color, bool>> filter)
-        {
-            using (RentACarContext context=new RentACarContext())
-            {
-                return context.Set<Color>().SingleOrDefault(filter);
-            }
-        }
-
-        public List<Color> GetAll(Expression<Func<Color, bool>> filter = null)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Update(Color entity)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }
