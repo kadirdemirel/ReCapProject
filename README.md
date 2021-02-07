@@ -38,5 +38,5 @@ Fiyat aralığı ile listeleme işlemi eklendi✓
 
 Fiyata göre artan ve azalan listeleme işlemi eklendi✓
 
-#
+
 
