@@ -39,10 +39,4 @@ Fiyat aralığı ile listeleme işlemi eklendi✓
 Fiyata göre artan ve azalan listeleme işlemi eklendi✓
 
 #
-![image](images/goruntu1.PNG)
-#
-![image](images/goruntu2.PNG)
-#
-![image](images/goruntu3.PNG)
-#
-![image](images/goruntu4.PNG)
+
