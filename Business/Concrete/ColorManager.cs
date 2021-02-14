@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -15,29 +16,48 @@ namespace Business.Concrete
             _colorsDal = colorsDal;
         }
 
-        public void Add(Color color)
+        public IResult Add(Color color)
         {
-            _colorsDal.Add(color);
+            if(color.ColorName.Length>2)
+            {
+                _colorsDal.Add(color);
+                return new SuccessResult(Messages.Added);
+            }
+            else
+            {
+                return new ErrorResult(Messages.NameInvalid);
+            }
+           
         }
 
-        public void Delete(Color color)
+        public IResult Delete(Color color)
         {
             _colorsDal.Delete(color);
+            return new SuccessResult(Messages.Deleted);
         }
 
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorsDal.GetAll();
+            return new SuccessDataResult<List<Color>>(_colorsDal.GetAll());
         }
 
-        public Color GetById(int colorId)
+        public IDataResult<Color> GetById(int colorId)
         {
-            return _colorsDal.Get(p => p.Id == colorId);
+            return new SuccessDataResult<Color>(_colorsDal.Get(p => p.Id == colorId));
         }
 
-        public void Update(Color color)
+        public IResult Update(Color color)
         {
-            _colorsDal.Update(color);
+       
+            if (color.ColorName.Length > 2)
+            {
+                _colorsDal.Update(color);
+                return new SuccessResult(Messages.Added);
+            }
+            else
+            {
+                return new ErrorResult(Messages.NameInvalid);
+            }
         }
     }
 }

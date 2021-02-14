@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -18,67 +19,87 @@ namespace Business.Concrete
         }
 
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
+            return new SuccessResult(Messages.Deleted);
         }
 
 
 
-        public List<Car> GetCarsByBrandId(int id)
+        public IDataResult<List<Car>> GetCarsByBrandId(int id)
         {
-            return _carDal.GetAll(p => p.BrandId == id);
+        
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.BrandId == id));
         }
 
-        public List<Car> GetCarsByColorId(int id)
+        public IDataResult<List<Car>> GetCarsByColorId(int id)
         {
-            return _carDal.GetAll(p => p.ColorId == id);
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.ColorId == id));
         }
 
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
-            _carDal.Update(car);
+            if(car.Description.Length > 2 && car.DailyPrice > 0)
+            {
+                _carDal.Update(car);
+                return new SuccessResult(Messages.Updated);
+            }
+            else
+            {
+                return new ErrorResult(Messages.NameInvalid);
+            }
+          
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
             if (car.Description.Length > 2 && car.DailyPrice > 0)
+            {
                 _carDal.Add(car);
+                return new SuccessResult(Messages.Added);
+
+            }
+
             else
-              Console.WriteLine("Hata !,Günlük ücret en az 0 TL ve açıklama uzunkuğu 2 karakterden fazla olmalıdır...");
+            {
+                return new ErrorResult(Messages.NameInvalid);
+
+            }
+
 
 
         }
 
-        public List<Car> GetByDailyPrice(decimal min, decimal max)
+        public IDataResult<List<Car>> GetByDailyPrice(decimal min, decimal max)
         {
-            
-            return _carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max);
+
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(p => p.DailyPrice >= min && p.DailyPrice <= max));
         }
 
-        public Car GetById(int carId)
+        public IDataResult<Car> GetById(int carId)
         {
-            return _carDal.Get(p => p.Id == carId);
+            return new SuccessDataResult<Car>(_carDal.Get(p => p.Id == carId));
         }
 
-        public List<CarDto> GetCarDetails()
+        public IDataResult<List<CarDto>> GetCarDetails()
         {
-            return _carDal.GetCarDetails();
+            return new SuccessDataResult<List<CarDto>>(_carDal.GetCarDetails());
         }
 
-        public List<CarDto> GetCarAsc()
+        public IDataResult<List<CarDto>> GetCarAsc()
         {
-            return _carDal.GetCarAsc();
+            return new SuccessDataResult<List<CarDto>>(_carDal.GetCarAsc());
         }
 
-        public List<CarDto> GetCarDesc()
+        public IDataResult<List<CarDto>> GetCarDesc()
         {
-            return _carDal.GetCarDesc();
+            return new SuccessDataResult<List<CarDto>>(_carDal.GetCarDesc());
         }
     }
 }
