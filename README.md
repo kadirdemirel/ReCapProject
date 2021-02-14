@@ -38,12 +38,5 @@ Fiyat aralığı ile listeleme işlemi eklendi✓
 
 Fiyata göre artan ve azalan listeleme işlemi eklendi✓
 
-#
-![image](Images/foto.PNG)
-#
-![image](Images/foto2.PNG)
-#
-![image](Images/foto3.PNG)
-#
-![image](Images/foto4.PNG)
+
 
