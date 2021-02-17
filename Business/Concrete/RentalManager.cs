@@ -18,30 +18,25 @@ namespace Business.Concrete
         }
         public IResult Add(Rental rental)
         {
-            
-                if (rental.RentDate >= DateTime.Now.Date)
-                {
-                    if (rental.ReturnDate <= DateTime.Now.Date)
-                    {
-                        _rentalDal.Add(rental);
 
-                        return new SuccessResult(Messages.Added);
+            if (rental.RentDate != null && rental.ReturnDate != null)
+            {
 
-                    }
-                    else
-                    {
-                        return new SuccessResult(Messages.NameInvalid);
-                    }
+                _rentalDal.Add(rental);
+                return new SuccessResult(Messages.Added);
 
-                }
-                else
-                {
-                    return new SuccessResult(Messages.NameInvalid);
-                }
-            
-           
-           
+
+            }
+            else
+            {
+                return new SuccessResult(Messages.NameInvalid);
+            }
+
+
+
         }
+
+
 
         public IResult Delete(Rental rental)
         {
@@ -52,6 +47,20 @@ namespace Business.Concrete
         public IDataResult<List<Rental>> GetAll()
         {
             return new SuccessDataResult<List<Rental>>(_rentalDal.GetAll());
+        }
+
+        public IDataResult<Rental> GetById(int carId)
+        {
+            var result = _rentalDal.Get(p => p.CarId == carId);
+            if(result!=null)
+            {
+                return new SuccessDataResult<Rental>(_rentalDal.Get(p => p.CarId == carId));
+            }
+            else
+            {
+                return new ErrorDataResult<Rental>(_rentalDal.Get(p => p.CarId == carId));
+            }
+            
         }
 
         public IDataResult<List<RentalDto>> GetRentalDetails()

@@ -11,6 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : EfEntityRepositoryBase<Rental, RentACarContext>, IRentalDal
     {
+      
         public List<RentalDto> GetRentalDetails()
         {
             using (RentACarContext context = new RentACarContext())

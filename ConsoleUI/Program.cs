@@ -48,7 +48,8 @@ namespace ConsoleUI
             Console.WriteLine("22-)Araç Kirala");
             Console.WriteLine("23-)Kiralanmış Araç Bilgilerini Güncelle");
             Console.WriteLine("24-)Kiralanmış Araç Listesi");
-            Console.WriteLine("25-)Program Sonlandır");
+            Console.WriteLine("25-)Araç Teslim Et");
+            Console.WriteLine("26-)Programı Sonlandır");
             string anaMenu;
             int secim = 0;
             try
@@ -548,12 +549,19 @@ namespace ConsoleUI
                         Console.WriteLine("Bitiş tarihini giriniz.");
                         returnDate = DateTime.Parse(Console.ReadLine());
                         Rental rental = new Rental { CarId = carId, CustomerId = customerId, RentDate = rentDate, ReturnDate = returnDate };
-                        var result = rentalManager.Add(rental);
-                        if (result.Success)
+                        var result2 = rentalManager.GetById(carId);
+                        if (result2.Success)
                         {
+                            Console.WriteLine("Bu araç zaten kiralandı.");
+                        }
+                        else
+                        {
+
                             rentalManager.Add(rental);
 
+
                         }
+
                         Console.WriteLine("Ana menüye dönmek ister misiniz? Evet==e||Hayır==h");
                         anaMenu = Console.ReadLine();
                         if (anaMenu == "e")
@@ -598,12 +606,39 @@ namespace ConsoleUI
                         Console.WriteLine("**************Kiralanmış Araç Listesi**************");
                         foreach (var rentalDto in rentalManager.GetRentalDetails().Data)
                         {
-                            Console.WriteLine("Id:" + rentalDto.Id + "/" + rentalDto.FirstName + "/" + rentalDto.LastName + "/" + rentalDto.RentDate + "/" + rentalDto.RentDate + "/" + rentalDto.BrandName + "/" + rentalDto.ColorName + "/" + rentalDto.ModelYear + "/" + rentalDto.DailyPrice + "/" + rentalDto.Description + "/" +rentalDto.CompanyName);
+                            Console.WriteLine("Id:" + rentalDto.Id + "/" + rentalDto.FirstName + "/" + rentalDto.LastName + "/" + rentalDto.RentDate + "/" + rentalDto.RentDate + "/" + rentalDto.BrandName + "/" + rentalDto.ColorName + "/" + rentalDto.ModelYear + "/" + rentalDto.DailyPrice + "/" + rentalDto.Description + "/" + rentalDto.CompanyName);
                             Console.WriteLine("---------------------------------------------");
                         }
                         break;
                     }
                 case 25:
+                    {
+                        int carId, id;
+                        Console.WriteLine("Teslim etmek istediğiniz kiralık araç Id değerini giriniz.");
+                        id = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Teslim etmek istediğiniz aracın Id değerini giriniz.");
+                        carId = Convert.ToInt32(Console.ReadLine());
+                        Rental rental = new Rental { Id = id, CarId = carId };
+                        var result = rentalManager.GetById(carId);
+                        if (result.Success)
+                        {
+                            rentalManager.Delete(rental);
+                        }
+                        else
+                        {
+                            Console.WriteLine("Böyle bir araç kaydı bulunmamaktadır.");
+                        }
+                        Console.WriteLine("Ana menüye dönmek ister misiniz? Evet==e||Hayır==h");
+                        anaMenu = Console.ReadLine();
+                        if (anaMenu == "e")
+                        {
+
+                            goto Tekrar;
+
+                        }
+                        break;
+                    }
+                case 26:
                     {
                         Console.WriteLine("Bir tuşa basın...");
                         Environment.Exit(0);
