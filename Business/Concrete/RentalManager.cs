@@ -29,7 +29,7 @@ namespace Business.Concrete
             }
             else
             {
-                return new SuccessResult(Messages.NameInvalid);
+                return new ErrorResult(Messages.NameInvalid);
             }
 
 
