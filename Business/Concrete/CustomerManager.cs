@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,24 +18,19 @@ namespace Business.Concrete
         {
             _customerDal = customerDal;
         }
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
-            if(customer.CompanyName.Length>0)
-            {
-                _customerDal.Add(customer);
-                return new SuccessResult(Messages.Added);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NameInvalid);
-            }
+            _customerDal.Add(customer);
+            return new SuccessResult(Messages.Added);
+
         }
 
         public IResult Delete(Customer customer)
         {
             _customerDal.Delete(customer);
             return new SuccessResult(Messages.Deleted);
-          
+
         }
 
         public IDataResult<List<Customer>> GetAll()
@@ -45,18 +42,12 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<CustomerDto>>(_customerDal.GetCustomerDetails());
         }
-
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)
         {
-            if (customer.CompanyName.Length > 0)
-            {
-                _customerDal.Update(customer);
-                return new SuccessResult(Messages.Updated);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NameInvalid);
-            }
+            _customerDal.Update(customer);
+            return new SuccessResult(Messages.Updated);
+
         }
     }
 }

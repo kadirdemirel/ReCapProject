@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -16,27 +18,13 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-
-            if (rental.RentDate != null && rental.ReturnDate != null)
-            {
-
-                _rentalDal.Add(rental);
-                return new SuccessResult(Messages.Added);
-
-
-            }
-            else
-            {
-                return new ErrorResult(Messages.NameInvalid);
-            }
-
-
+            _rentalDal.Add(rental);
+            return new SuccessResult(Messages.Added);
 
         }
-
-
 
         public IResult Delete(Rental rental)
         {
@@ -52,7 +40,7 @@ namespace Business.Concrete
         public IDataResult<Rental> GetById(int carId)
         {
             var result = _rentalDal.Get(p => p.CarId == carId);
-            if(result!=null)
+            if (result != null)
             {
                 return new SuccessDataResult<Rental>(_rentalDal.Get(p => p.CarId == carId));
             }
@@ -60,25 +48,19 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<Rental>(_rentalDal.Get(p => p.CarId == carId));
             }
-            
+
         }
 
         public IDataResult<List<RentalDto>> GetRentalDetails()
         {
             return new SuccessDataResult<List<RentalDto>>(_rentalDal.GetRentalDetails());
         }
-
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Update(Rental rental)
         {
-            if (rental.RentDate >= DateTime.Now)
-            {
-                _rentalDal.Update(rental);
-                return new SuccessResult(Messages.Updated);
-            }
-            else
-            {
-                return new ErrorResult(Messages.NameInvalid);
-            }
+            _rentalDal.Update(rental);
+            return new SuccessResult(Messages.Updated);
+
         }
     }
 }
