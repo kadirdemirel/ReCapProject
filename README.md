@@ -12,7 +12,7 @@
 </ul>
 
 ## Dependency Injection
-Dependency Injection türkçe anlamıyla Bağımlılık Enjeksiyonu anlamına gelir. Bu teknik SOLID prensiplerinin 5. harfi olaran Dependency Inversion ayağının partneri diyebiliriz. Dependency Injection en basit mantıkla bir nesnenin bağlı olduğu diğer nesnelere ulaşmak için kullanılan bir tekniktir. Neden böyle bir yapıya ihtiyaç duyuyoruz diye sorarsak bağımlılıkları ortadan kaldırmak için diyebiliriz. Bu sayede ise;
+Dependency Injection türkçe anlamıyla Bağımlılık Enjeksiyonu anlamına gelir. Bu teknik SOLID prensiplerinin 5. harfi olan Dependency Inversion ayağının partneri diyebiliriz. Dependency Injection en basit mantıkla bir nesnenin bağlı olduğu diğer nesnelere ulaşmak için kullanılan bir tekniktir. Neden böyle bir yapıya ihtiyaç duyuyoruz diye sorarsak bağımlılıkları ortadan kaldırmak için diyebiliriz. Bu sayede ise;
 <ul>
 <li>Gevşek Bağımlı uygulamalar tasarlayabilir(Loosely Coupled)</li>
 <li>Uygulama içerisinde değişmesi gereken yerler en aza indirgenebilir yani onlarca yerde değişiklik yapmak yerine tek bir çatıda yapılabilir.</li>
