@@ -81,7 +81,7 @@ Dependency Inversion bir tasarım desenini kullanır oda yukarıda anlatmış ol
 API, Türkçe anlamı “Uygulama Geliştirme Arayüzü” olan “Application Programming Interface” kelimelerinin baş harflerinden meydana gelen bir kelimedir. API sayesinde yazılım geliştiricileri, ellerindeki verileri yada işlevsellikleri istedikleri sınırlılıkta dış dünyayla paylaşabilmekte ve bu paylaşım sürecinde tüm kontrolleri ellerinde tutabilmektedirler.
 Web API kullanma ihtiyacı ise şu şekilde ortaya çıkıyor artık günümüzde cep telefon tablet gibi cihazların kullanım artışıyla sadece Web Siteleri yetersiz kalmaktadır bu yüzden Web API ile diğer cihazlardaki kullancı isteklerine de karşılık vermek amacıyla API ihtiyacı ortaya çıkmıştır.
 
-##Autofac
+## Autofac
 Autofac, .Net için yazılmış bir containerdır ve kullanımı oldukça kolay ve kullanışlıdır. IoC Container yerine kullanılabilir ancak aklımıza şu soru gelebilir zaten .Net'in içinde default olarak var olan bir kullanım varken neden bu gibi Containerlara ihtiyaç duyuyoruz diyebilirsiniz bunu şöyle açıklayabiliriz Autofac bize AOP yapmamızı sağlayan bir yapıdır ve bunun dışında yarın öbür gün farklı servis sağlayıcıları yada farklı API eklendiğini düşünecek olursak var olan yöntem biraz ilkel kalacaktır.
 
 ## Fluent Validation
