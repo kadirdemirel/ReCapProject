@@ -7,8 +7,12 @@
 <li>SOLID</li>
 <li>Web API</li>
 <li>Autofac</li>
-<li>Fluent Validation</li>
 <li>AOP</li>
+<li>Fluent Validation</li>
+<li>JWT</li>
+<li>Caching</li>
+<li>Performance Management</li>
+<li>Transaction</li>  
 </ul>
 
 ## Dependency Injection
