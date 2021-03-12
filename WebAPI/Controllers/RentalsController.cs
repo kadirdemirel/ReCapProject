@@ -60,7 +60,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _rentalService.GetAll();
+            var result = _rentalService.GetRentalDetails();
             if(result.Success)
             {
                 return Ok(result);

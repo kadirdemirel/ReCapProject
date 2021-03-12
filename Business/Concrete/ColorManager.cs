@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
+using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -17,6 +20,7 @@ namespace Business.Concrete
         {
             _colorsDal = colorsDal;
         }
+        [SecuredOperation("brand.add")]
         [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
@@ -35,7 +39,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Color>>(_colorsDal.GetAll());
         }
-
+        [CacheAspect]
         public IDataResult<Color> GetById(int colorId)
         {
             return new SuccessDataResult<Color>(_colorsDal.Get(p => p.Id == colorId));

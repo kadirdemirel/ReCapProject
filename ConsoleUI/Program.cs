@@ -371,7 +371,8 @@ namespace ConsoleUI
                     }
                 case 14:
                     {
-                        string ad, soyad, email, password;
+                        string ad, soyad, email;
+                        byte[] password;
                         Console.WriteLine("Kullanıcı adı giriniz.");
                         ad = Console.ReadLine();
                         Console.WriteLine("Kullanıcı soyadı giriniz.");
@@ -379,8 +380,8 @@ namespace ConsoleUI
                         Console.WriteLine("Email giriniz.");
                         email = Console.ReadLine();
                         Console.WriteLine("Şifre giriniz.");
-                        password = Console.ReadLine();
-                        User user = new User { FirstName = ad, LastName = soyad, Email = email, Password = password };
+                        password = Convert.FromBase64String(Console.ReadLine());
+                        User user = new User { FirstName = ad, LastName = soyad, Email = email, PasswordHash = password };
                         userManager.Add(user);
                         Console.WriteLine("Kullanıcı başarıyla eklendi.");
                         Console.WriteLine("Ana menüye dönmek ister misiniz? Evet==e||Hayır==h");
@@ -415,7 +416,8 @@ namespace ConsoleUI
                 case 16:
                     {
                         int id = 0;
-                        string ad, soyad, email, password;
+                        string ad, soyad, email;
+                        byte[] password;
                         Console.WriteLine("Güncellemek istediğiniz kullanıcının Id değerini giriniz.");
                         id = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Kullanıcı adı giriniz.");
@@ -425,8 +427,8 @@ namespace ConsoleUI
                         Console.WriteLine("Email giriniz.");
                         email = Console.ReadLine();
                         Console.WriteLine("Şifre giriniz.");
-                        password = Console.ReadLine();
-                        User user = new User { FirstName = ad, LastName = soyad, Email = email, Password = password };
+                        password = Convert.FromBase64String(Console.ReadLine());
+                        User user = new User { FirstName = ad, LastName = soyad, Email = email, PasswordHash = password };
                         userManager.Update(user);
                         Console.WriteLine("Kullanıcı bilgileri başarıyla güncellenmiştir.");
                         Console.WriteLine("Ana menüye dönmek ister misiniz? Evet==e||Hayır==h");
@@ -443,7 +445,7 @@ namespace ConsoleUI
                     {
                         foreach (var user in userManager.GetAll().Data)
                         {
-                            Console.WriteLine("Id:" + user.Id + "/" + user.FirstName + "/" + user.LastName + "/" + user.Email + "/" + user.Password);
+                            Console.WriteLine("Id:" + user.Id + "/" + user.FirstName + "/" + user.LastName + "/" + user.Email + "/" + user.PasswordHash);
                             Console.WriteLine("---------------------------------------------");
                         }
                         Console.WriteLine("Ana menüye dönmek ister misiniz? Evet==e||Hayır==h");
