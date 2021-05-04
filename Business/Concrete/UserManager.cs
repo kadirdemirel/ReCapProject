@@ -46,12 +46,12 @@ namespace Business.Concrete
 
         }
 
-        IDataResult<List<OperationClaim>> IUserService.GetClaims(User user)
+        IDataResult<List<OperationClaim>> GetClaims(User user)
         {
             return new SuccessDataResult<List<OperationClaim>>(_userDal.GetClaims(user));
         }
 
-        IDataResult<User> IUserService.GetByMail(string email)
+        IDataResult<User> GetByMail(string email)
         {
             return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
         }
